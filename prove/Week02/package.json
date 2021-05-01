@@ -2,7 +2,7 @@
     "scripts": {
         "start": "nodemon index.js",
         "test": "node test.js",
-        "tutorialApp": "nodemon admin.js"
+        "prove02": "nodemon main.js"
     },
     "dependencies": {
         "body-parser": "^1.19.0",
