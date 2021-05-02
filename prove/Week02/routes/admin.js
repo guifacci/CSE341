@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 
 //const router = express.Router();
 const router = express();
-const booksArray = [{bookTitle: 'Dom Casmurro', bookSummary: 'Machado de Asssis'}];
+const booksArray = [];
 
 router.use(express.urlencoded({extended: false}));
 
