@@ -17,8 +17,12 @@
 
         <% if (books.length > 0) { %>
             <% for(let book of books) { %>
-                <p><%= book.bookId %> - <%= book.bookTitle %> - <%= book.bookSummary %> - $ <%= book.bookPrice %></p><br>
-                <a href="/books/<%= book._id%>" class="btn">Details</a> - <a href="/cart" class="btn">Add to Cart</a>
+                <p><%= book.bookTitle %> - <%= book.bookSummary %> - $ <%= book.bookPrice %></p><br>
+                <a href="/books/<%= book._id%>" class="btn">Details</a> - <a href="/edit-product/<%= book._id%>" class="btn">Edit</a> 
+                -   <form action="/delete-product" method="POST">
+                        <input type="hidden" value="<%= book._id %>" name="bookId">
+                        <button type="submit">Delete</button>
+                    </form> 
             <% } %>
        <% }else { %>
                 <h1>No Products Found!</h1>
