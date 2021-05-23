@@ -11,18 +11,27 @@
     </head>
 
     <body>
-        <a href="/">Home</a><br>
+       
+        <a href="/">Home</a> 
+        <a href="/login" style="display:block; text-align:right;">Login</a>
+        <% console.log(isAuthenticated); %>
+        <% if (isAuthenticated){ %>
         <br><a href="/books">Add Book Summary</a>
+        <% } %>
         <h1>Registered Books </h1><br>
 
         <% if (books.length > 0) { %>
             <% for(let book of books) { %>
                 <p><%= book.bookTitle %> - <%= book.bookSummary %> - $ <%= book.bookPrice %></p><br>
-                <a href="/books/<%= book._id%>" class="btn">Details</a> - <a href="/edit-product/<%= book._id%>" class="btn">Edit</a> 
+               
+                <a href="/books/<%= book._id%>" class="btn">Details</a>   <% if (isAuthenticated){ %> - <a href="/edit-product/<%= book._id%>" class="btn">Edit</a> 
+                <% } %>
+                <% if (isAuthenticated){ %>
                 -   <form action="/delete-product" method="POST">
                         <input type="hidden" value="<%= book._id %>" name="bookId">
                         <button type="submit">Delete</button>
                     </form> 
+                <% } %>
             <% } %>
        <% }else { %>
                 <h1>No Products Found!</h1>

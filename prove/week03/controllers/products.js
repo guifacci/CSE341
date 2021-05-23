@@ -1,7 +1,9 @@
 const { response } = require('express');
 const Books = require('../models/product');
+
+
 exports.getAddBooksPage = (request, response, next)=>{
-    response.render('add-books',  {pageTitle: 'Title For Books' });
+    response.render('add-books',  {pageTitle: 'Title For Books', isAuthenticated: request.isLoggedIn });
 };
 
 exports.postAddBooksProcess = (request, response, next)=>{
@@ -23,7 +25,7 @@ exports.getHomePage = (request, response, next)=>{
     Books.find()
     .then(books =>{
         console.log(books);
-        response.render('home', {books: books});
+        response.render('home', {books: books, isAuthenticated: request.isLoggedIn});
     })
     .catch(err => {
         console.log(err);
@@ -34,7 +36,7 @@ exports.getBook = (request, response, next) => {
     const bookId = request.params.bookId;
     //Books.getBookById(bookId)
     Books.findById(bookId).then(book => {
-        response.render('product-details', {book: book});
+        response.render('product-details', {book: book, isAuthenticated: request.isLoggedIn});
     })
     .catch(err => {
         console.log(err);
@@ -45,7 +47,7 @@ exports.getEditBook = (request, response, next) => {
     const bookId = request.params.bookId;
     //Books.getBookById
     Books.findById(bookId).then(book => {
-        response.render('edit-product', {book: book});
+        response.render('edit-product', {book: book, isAuthenticated: request.isLoggedIn});
     })
     .catch(err => {
         console.log(err);
@@ -77,7 +79,7 @@ exports.postDeleteBook = (request, response, next) => {
     //Books.delete(bookId)
     Books.findByIdAndRemove(bookId)
     .then(() => {
-        response.render('delete-confirmation');
+        response.render('delete-confirmation', {isAuthenticated: request.isLoggedIn});
         return book.destroy();
     })
     .then(result => {
@@ -93,9 +95,11 @@ exports.getDeleteConfirmation = (request, response, next) => {
     Books.find()
     .then(books =>{
         console.log(books);
-        response.render('delete-confirmation', {books: books});
+        response.render('delete-confirmation', {books: books, isAuthenticated: request.isLoggedIn});
     })
     .catch(err => {
         console.log(err);
     });
 }
+
+

@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const productConstroller = require('../controllers/products');
+const usersController = require('../controllers/usersController');
 const { response } = require('express');
 
 //const router = express.Router();
@@ -26,5 +27,6 @@ router.post('/edit-product', productConstroller.postEditProduct);
 router.post('/delete-product', productConstroller.postDeleteBook);
 //Deleting confirmation
 router.get('/delete-confirmation', productConstroller.getDeleteConfirmation);
+
 
 module.exports = router;
